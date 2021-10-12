@@ -7,25 +7,25 @@ export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
-export const SSO_URL = "https://sso.isan.to/login?service=";
+export const SSO_URL = "https://sso.tac-map.com/login?service=";
 export const URLS = {
 	api: {
-		local: "http://localhost:8000/",
-		prod: "https://api.isan.to/",
-		lite: "https://api.isan.to/",
-		remoteDev: "https://api.isan.to/",
+		local: "https://api.tac-map.com/",
+		prod: "https://api.tac-map.com/",
+		lite: "https://api.tac-map.com/",
+		remoteDev: "https://api.tac-map.com/",
 	},
 	wss: {
-		local: "ws://localhost:8006/",
-		prod: "wss://ws.isan.to:443/",
-		lite: "wss://ws.isan.to:443/",
-		remoteDev: "wss://ws.isan.to:443/",
+		local: "wss://ws.tac-map.com:443/",
+		prod: "wss://ws.tac-map.com:443/",
+		lite: "wss://ws.tac-map.com:443/",
+		remoteDev: "wss://ws.tac-map.com:443/",
 	},
 	login: {
-		local: SSO_URL + "http://localhost/",
-		prod: SSO_URL + "https://isan.to/",
-		lite: SSO_URL + "http://lite.isan.to/",
-		remoteDev: SSO_URL + "http://localhost/",
+		local: SSO_URL + "https://tac-map.com/",
+		prod: SSO_URL + "https://tac-map.com/",
+		lite: SSO_URL + "http://tac-map.com/",
+		remoteDev: SSO_URL + "http://localhost:5000/",
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
@@ -103,6 +103,14 @@ export const TYPES = {
 		subtypes: [{
 				name: "Default",
 				hex: "#3bbd4f",
+			},
+			{
+				name: "Tactical",
+				hex: "#ad71d9"
+			},
+			{
+				name: "Redacted",
+				hex: "#383838"
 			},
 			{
 				name: "Collective",

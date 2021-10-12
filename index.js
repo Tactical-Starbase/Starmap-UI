@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-const POINT_INFO_API = "https://api.isan.to/front/getPointInfo/";
+const POINT_INFO_API = "https://api.tac-map.com/front/getPointInfo/";
 // const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
 	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
@@ -18,11 +18,6 @@ app.get("/favicon.ico", (req, res) => {
 		root: __dirname,
 	});
 });
-app.get("/isan.pdf", (req, res) => {
-	res.sendFile("./public/isan.pdf", {
-		root: __dirname,
-	});
-});
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
 	console.log(URL);
@@ -34,11 +29,10 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		<meta property="og:url" content="${URL}" />
 	`;
 	const defaultSiteTags = `
-		<meta property="og:description" content="A dynamic real time map for Starbase\nCreated by Strikeeaglechase#0001" />
+		<meta property="og:description" content="A dynamic real time map for Starbase, provided by Tactical" />
 		<meta property="og:image" content="${IMGS.ico}" />
-		<meta property="og:title" content="Starmap" />
-		<meta property="og:site_name" content="Support server - https://discord.gg/Collective" />
-		
+		<meta property="og:title" content="TACMap" />
+
 	`;
 	if (req.params.pointId) {
 		//For custom URL stuff
@@ -56,7 +50,7 @@ app.get(["/:pointId", "/"], async (req, res) => {
 			if (data.resType == "redirect") return res.redirect(data.url);
 
 			openGraphStyles += `
-				<meta property="og:site_name" content="Starmap" />
+				<meta property="og:site_name" content="TACMap" />
 				<meta property="og:title" content="${data.name}" />
 				<meta property="og:description" content="Point created by ${data.owner}" />
 				<meta property="og:image" content="${IMGS[data.type]}" />

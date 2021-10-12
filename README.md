@@ -20,75 +20,35 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-
+<!--
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-
+ -->
 
 
 
 <!-- ABOUT THE PROJECT -->
-[![Product Name Screen Shot][product-screenshot]](https://isan.to)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://tac-map.com) -->
 
   <p align="center">
-    A 3D public map for the game Starbase. 
-    <br>Additionally includes support for creating private maps
-    <br />
-    <br>
-    <a href="https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://isan.to">View Project</a>
-    ·
-    <a href="https://discord.gg/VnU8apR">Report Bug</a>
-    ·
-    <a href="#">Request Feature</a>
   </p>
 </p>
 <p align="center">
-ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
+TPS Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
 
 <br>
 
-_For a more descriptive explanation about the ISAN Starmap please read the: 
-[ISAN Documentation](https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf)_
 
 </p>
-
-<!-- TABLE OF CONTENTS 
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>-->
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To play around with a local copy of <strong>`ISAN Starmap`</strong> run these following steps.
+To play around with a local copy of <strong>`TPS Starmap`</strong> run these following steps.
 
 ### Prerequisites
 
@@ -100,19 +60,19 @@ Ensure you have nodejs installed on your computer (can check by running the comm
 
 1. Clone the repo using the command:
    ```sh
-   git clone https://github.com/Collective-SB/Starmap
+   git clone https://github.com/Tactical-Starbase/Starmap-UI
    ```
 2. In the new directory <strong>`/Starmap`</strong> run the command:
    ```sh
    npm install
    ```
-3. Create a new file called <strong>`.env`</strong> (in the same directory). 
+3. Create a new file called <strong>`.env`</strong> (in the same directory).
    <br>
    Copy this into that file and save:
       ```js
       PORT=80
       ```
-4. Create a new file called <strong>`env.js`</strong>, place this file in the <strong>`public\js`</strong> folder. 
+4. Create a new file called <strong>`env.js`</strong>, place this file in the <strong>`public\js`</strong> folder.
 <br>The content of the file should be:
    ```js
    export const ENV_FROM_ENVJS = "remoteDev";
@@ -122,7 +82,7 @@ Ensure you have nodejs installed on your computer (can check by running the comm
    ```sh
    node index.js
    ```
-6. Finally to test that it is working, In your browser type in: <strong>`http:\\localhost\`</strong> and you should now see the ISAN Starmap loading.
+6. Finally to test that it is working, In your browser type in: <strong>`http:\\localhost\`</strong> and you should now see the TPS Starmap loading.
 
 
 
@@ -131,7 +91,7 @@ Ensure you have nodejs installed on your computer (can check by running the comm
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Collective-SB/Starmap/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Tactical-Starbase/Starmap-UI/issues) for a list of proposed features (and known issues).
 
 
 
@@ -140,29 +100,7 @@ See the [open issues](https://github.com/Collective-SB/Starmap/issues) for a lis
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-ISAN Starmap Team Members:
-* <strong>Strikeeaglechase:</strong> Lead JS Developer [[Github](https://github.com/Strikeeaglechase)]
-* <strong>VolcanoCookies:</strong> JS Developer [[Github](https://github.com/VolcanoCookies)]
-* <strong>AlexAndHisScripts/IHave:</strong>  Early Front End/JS Developer [[Github](https://github.com/AlexAndHisScripts)]
-* <strong>Timothy Howard:</strong> UI/UX Developer [[Github](https://github.com/timhow38) | [Linkedin](https://www.linkedin.com/in/timhow20/)]
-* <strong>MuNk:</strong> Extensive API Testing [[Github]()]
-
-
-
-<details>
-  <summary><p style="display: inline-block">Thanks to the old Starmap team for the inspiration</p></summary>
-  <ol>
-    <li>
-    <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/">Linkedin</a>]
-    </li>
-    <li>
-    <strong>Maximilian Lambert:</strong> JS Developer [<a href="https://www.linkedin.com/in/maximilian-lambert-00423b192/">Linkedin</a>]
-    </li>
-    <li>
-    <strong>Timothy Howard:</strong> UI/UX Developer [<a href="https://www.linkedin.com/in/timhow20/">Linkedin</a> | <a href="https://github.com/timhow38">Github</a>]
-    </li>
-  </ol>
-</details>
+Code forked from The Collective (https://github.com/Collective-SB/Starmap)
 
 ### Built With
 
@@ -176,9 +114,10 @@ ISAN Starmap Team Members:
 <!-- LICENSE -->
 ## License
 
-ISAN Starmap is an open source client built on top of
-the <strong>`Starmap API`</strong> made to allow storage of ISAN locations
-<strong>`Copyright (C) 2020 Strikeeaglechase`</strong>
+TPS Starmap is an open source client built on top of
+the <strong>`ISAN Starmap`</strong> and <strong>`Starmap API`</strong> made to
+allow storage of ISAN locations
+<strong>`Copyright (C) 2021 Spedione`</strong>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -192,19 +131,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Collective-SB/Starmap.svg?style=for-the-badge
-[contributors-url]: https://github.com/Collective-SB/Starmap/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Collective-SB/Starmap.svg?style=for-the-badge
-[forks-url]: https://github.com/Collective-SB/Starmap/network/members
-[stars-shield]: https://img.shields.io/github/stars/Collective-SB/Starmap.svg?style=for-the-badge
-[stars-url]: https://github.com/Collective-SB/Starmap/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Collective-SB/Starmap.svg?style=for-the-badge
-[issues-url]: https://github.com/Collective-SB/Starmap/issues
-[license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
-[license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
-[product-screenshot]: readme-assets/isan-logo.png
