@@ -7,25 +7,25 @@ export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
-export const SSO_URL = "https://sso.isan.to/login?service=";
+export const SSO_URL = "https://sso-starmap.spedione.io/login?service=";
 export const URLS = {
 	api: {
-		local: "http://localhost:8000/",
-		prod: "https://api.isan.to/",
-		lite: "https://api.isan.to/",
-		remoteDev: "https://api.isan.to/",
+		local: "http://api-starmap.spedione.io:5000/",
+		prod: "https://api-starmap.spedione.io/",
+		lite: "https://api-starmap.spedione.io/",
+		remoteDev: "https://api-starmap.spedione.io/",
 	},
 	wss: {
-		local: "ws://localhost:8006/",
-		prod: "wss://ws.isan.to:443/",
-		lite: "wss://ws.isan.to:443/",
-		remoteDev: "wss://ws.isan.to:443/",
+		local: "wss://ws-starmap.spedione.io:443/",
+		prod: "wss://ws-starmap.spedione.io:443/",
+		lite: "wss://ws-starmap.spedione.io:443/",
+		remoteDev: "wss://ws-starmap.spedione.io:443/",
 	},
 	login: {
-		local: SSO_URL + "http://localhost/",
-		prod: SSO_URL + "https://isan.to/",
-		lite: SSO_URL + "http://lite.isan.to/",
-		remoteDev: SSO_URL + "http://localhost/",
+		local: SSO_URL + "http://starmap.spedione.io/",
+		prod: SSO_URL + "https://starmap.spedione.io/",
+		lite: SSO_URL + "http://starmap.spedione.io/",
+		remoteDev: SSO_URL + "http://localhost:5000/",
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
@@ -132,6 +132,10 @@ export const TYPES = {
 			{
 				name: "LINGCORP",
 				hex: "#5794d5"
+			},
+			{
+				name: "Tactical",
+				hex: "#ad71d9"
 			}
 		],
 		widthmult: 1.5,
