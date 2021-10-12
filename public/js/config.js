@@ -105,6 +105,14 @@ export const TYPES = {
 				hex: "#3bbd4f",
 			},
 			{
+				name: "Tactical",
+				hex: "#ad71d9"
+			},
+			{
+				name: "Redacted",
+				hex: "#383838"
+			},
+			{
 				name: "Collective",
 				hex: "#ff0000",
 			},
@@ -132,10 +140,6 @@ export const TYPES = {
 			{
 				name: "LINGCORP",
 				hex: "#5794d5"
-			},
-			{
-				name: "Tactical",
-				hex: "#ad71d9"
 			}
 		],
 		widthmult: 1.5,
