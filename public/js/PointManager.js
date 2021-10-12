@@ -23,7 +23,8 @@ import {
 	hexToRgb,
 	map,
 	constrain,
-	tubeLine
+	tubeLine,
+	parseTypeName
 } from "./functions.js";
 
 function sortDiv(divId) {

@@ -125,7 +125,8 @@ import {
 	constrain,
 	map,
 	copyToClipboard,
-	formatNumber
+	formatNumber,
+	parseTypeName
 } from "./functions.js";
 
 import PointManager, {
