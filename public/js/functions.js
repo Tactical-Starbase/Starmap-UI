@@ -4,6 +4,10 @@ export function lerp(start, stop, amt) {
 	return amt * (stop - start) + start;
 }
 
+export function parseTypeName(name) {
+	return name.split(" ").join("-");
+}
+
 export function hexToRgb(hex) {
 	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	if (result) {

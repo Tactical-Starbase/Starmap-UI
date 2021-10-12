@@ -148,10 +148,6 @@ String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
 };
 
-function parseTypeName(name) {
-	return name.split(" ").join("-");
-}
-
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
 //Main map application
 class App {

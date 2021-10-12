@@ -768,7 +768,7 @@ export default class PointManager {
 	updateDisplayed(filters) {
 		this.points.forEach((point) => {
 			const show =
-				filters.types[point.info.type] && filters.groups[point.groupID];
+				filters.types[parseTypeName(point.info.type)] && filters.groups[point.groupID];
 			point.updateShow(show != undefined ? show : true);
 		});
 		for (var groupID in filters.groups) {
