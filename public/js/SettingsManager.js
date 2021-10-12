@@ -162,7 +162,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-01",
-		default: "#1267ce",
+		default: "#7b1cc2",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
