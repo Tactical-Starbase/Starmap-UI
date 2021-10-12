@@ -58,12 +58,12 @@ const infoTemplate = `
 		</div>
 	</div>
 
-	
 
 
-	
-	
-	
+
+
+
+
 
 </div>
 `;
@@ -1231,7 +1231,7 @@ class App {
 		for (var t in TYPES) {
 			const type = TYPES[t];
 			const option = document.createElement("option");
-			option.value = parseTypeName(type.name);
+			option.value = type.name;
 			option.innerText = parseTypeName(type.name);
 			dropDownTypes.appendChild(option);
 		}
