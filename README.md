@@ -37,7 +37,7 @@
   </p>
 </p>
 <p align="center">
-TPS Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
+TACMap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
 
 <br>
 
@@ -48,7 +48,7 @@ TPS Starmap is a navigation system developed for the purpose storing and calcula
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To play around with a local copy of <strong>`TPS Starmap`</strong> run these following steps.
+To play around with a local copy of <strong>`TACMap`</strong> run these following steps.
 
 ### Prerequisites
 
@@ -62,7 +62,7 @@ Ensure you have nodejs installed on your computer (can check by running the comm
    ```sh
    git clone https://github.com/Tactical-Starbase/Starmap-UI
    ```
-2. In the new directory <strong>`/Starmap`</strong> run the command:
+2. In the new directory <strong>`/Starmap-UI`</strong> run the command:
    ```sh
    npm install
    ```
@@ -114,7 +114,7 @@ Code forked from The Collective (https://github.com/Collective-SB/Starmap)
 <!-- LICENSE -->
 ## License
 
-TPS Starmap is an open source client built on top of
+TACMap is an open source client built on top of
 the <strong>`ISAN Starmap`</strong> and <strong>`Starmap API`</strong> made to
 allow storage of ISAN locations
 <strong>`Copyright (C) 2021 Spedione`</strong>
