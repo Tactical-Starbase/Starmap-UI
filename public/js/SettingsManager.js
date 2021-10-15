@@ -77,11 +77,11 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
-		id: "isanRangeDisp",
+		id: "tpsRangeDisp",
 		default: false,
 		prop: "checked",
 		set: function (val) {
-			this.sceneObjs.IsanSphere.visible = val;
+			this.sceneObjs.TpsSphere.visible = val;
 		},
 	},
 	{
@@ -153,7 +153,7 @@ const SETTINGS_DEF = [{
 		}
 	},
 	{
-		id: "showIsanAxis",
+		id: "showTpsAxis",
 		default: false,
 		prop: "checked",
 		set: function (val) {

@@ -512,7 +512,6 @@ class Zone {
 		};
 		this.mapData = {
 			position: {
-				//This is the ISAN cord
 				x: 0,
 				y: 0,
 				z: 0,
@@ -707,7 +706,7 @@ export default class PointManager {
 			},
 			name: "Test Zone!",
 			desc: "I am a test",
-			type: "ISAN",
+			type: "TPS",
 			color: "#ff00ff",
 		});
 		this.zones.push(zone);

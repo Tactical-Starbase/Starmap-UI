@@ -19,10 +19,10 @@ const infoTemplate = `
 		</div>
 
 		<div class="info-coord-grid">
-			<div class="isanDispalyDiv">
-				<p class="infoText no-drag isanDispalyVal">X: %POS_X%</p>
-				<p class="infoText no-drag isanDispalyVal">Y: %POS_Y%</p>
-				<p class="infoText no-drag isanDispalyVal">Z: %POS_Z%</p>
+			<div class="tpsDisplayDiv">
+				<p class="infoText no-drag tpsDisplayVal">X: %POS_X%</p>
+				<p class="infoText no-drag tpsDisplayVal">Y: %POS_Y%</p>
+				<p class="infoText no-drag tpsDisplayVal">Z: %POS_Z%</p>
 			</div>
 		</div>
 
@@ -104,7 +104,7 @@ import {
 	MARKER_SIZE_MAX,
 	DIST_MIN,
 	DIST_MAX,
-	ISAN_RANGE,
+	TPS_RANGE,
 	safePos,
 	pointOffset,
 	TYPES,
@@ -163,7 +163,7 @@ class App {
 			Belt: null,
 			Safe: null,
 			EosClouds: null,
-			IsanSphere: null,
+			TpsSphere: null,
 		};
 		this.cameraController;
 		this.storage = localStorage;
@@ -401,20 +401,20 @@ class App {
 		);
 		this.sceneObjs.scene.add(this.sceneObjs.EosClouds);
 
-		const isanGeom = new THREE.SphereGeometry(ISAN_RANGE, 32, 32);
-		const isanMat = new THREE.MeshStandardMaterial({
+		const tpsGeom = new THREE.SphereGeometry(TPS_RANGE, 32, 32);
+		const tpsMat = new THREE.MeshStandardMaterial({
 			color: 0x00ff00,
 			transparent: true,
 			opacity: 0.3,
 			// side: THREE.DoubleSide,
 		});
-		this.sceneObjs.IsanSphere = new THREE.Mesh(isanGeom, isanMat);
-		this.sceneObjs.IsanSphere.position.set(
+		this.sceneObjs.TpsSphere = new THREE.Mesh(tpsGeom, tpsMat);
+		this.sceneObjs.TpsSphere.position.set(
 			pointOffset.x,
 			pointOffset.y,
 			pointOffset.z
 		);
-		this.sceneObjs.scene.add(this.sceneObjs.IsanSphere);
+		this.sceneObjs.scene.add(this.sceneObjs.TpsSphere);
 
 		//Create the cam controller
 		this.cameraController = new CamController(
@@ -831,7 +831,7 @@ class App {
 		const planeHeight = (maxs.y - mins.y);
 		const scaleX = planeWidth / imgWidth;
 		const scaleY = planeHeight / imgHeight;
-		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; // Reeee ISAN why is "Z" up/down not "Y"
+		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; 
 		// Create the planes
 		let imgIdx = 0;
 		const loader = new THREE.TextureLoader();
