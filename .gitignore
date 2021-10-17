@@ -108,3 +108,5 @@ public/.idea/modules.xml
 public/.idea/public.iml
 public/.idea/vcs.xml
 public/.idea/workspace.xml
+
+*.DS_Store
