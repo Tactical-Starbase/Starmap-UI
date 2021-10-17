@@ -548,7 +548,7 @@ class App {
 		const self = this;
 		$("#new-point").click(function () {
 			if (app.user.isPubToken) {
-				app.modalConfirm("Login Required")
+				app.modalNotify("Login Required")
 				return;
 			}
 			self.updateFormMode.call(self, "create");
@@ -1069,6 +1069,11 @@ class App {
 
 			document.getElementById("betterConfirm").style.display = "block"
 
+			document.getElementById('betterConfirm-ok').style.display = "None";
+			document.getElementById('betterConfirm-yes').style.display = "inline-block";
+			document.getElementById('betterConfirm-no').style.display = "inline-block";
+
+
 			document.getElementById('betterConfirm-yes').onclick = function () {
 				document.getElementById("betterConfirm").style.display = "none";
 				console.log("yes")
@@ -1079,6 +1084,24 @@ class App {
 				document.getElementById("betterConfirm").style.display = "none";
 				console.log("no")
 				resolve(false);
+			};
+		});
+	}
+
+	modalNotify(text) {
+		return new Promise(resolve => {
+			document.getElementById("betterConfirm-text").innerText = text;
+
+			document.getElementById("betterConfirm").style.display = "block"
+
+			document.getElementById('betterConfirm-ok').style.display = "inline-block";
+			document.getElementById('betterConfirm-yes').style.display = "None";
+			document.getElementById('betterConfirm-no').style.display = "None";
+
+			document.getElementById('betterConfirm-ok').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("ok")
+				resolve(true);
 			};
 		});
 	}
@@ -1156,10 +1179,6 @@ class App {
 		if (this.user.isPubToken) {
 			const addPointMsg = document.getElementById("add-point-message")
 			addPointMsg.innerText = "Login to Add Point"
-		}
-		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
-			//User is a subr, lets set their style
-			this.updateTheme01("#b72015");
 		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
