@@ -625,7 +625,7 @@ class App {
 		};
 		document.getElementById("logout").onclick = async function () {
 			if (app.user.isPubToken) {
-				app.modalConfirm("You're already logged out.")
+				app.modalNotify("You're already logged out.")
 				return;
 			}
 			if (!await app.modalConfirm("Would you like to logout?")) return;
