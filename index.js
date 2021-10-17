@@ -10,7 +10,7 @@ const IMGS = {
 	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
 	station: "https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
 	other: "https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
-	ico: "https://cdn.discordapp.com/attachments/892150703341072497/899373165384466542/Icon.png",
+	ico: "https://cdn.discordapp.com/attachments/871487569634947083/899375052955471902/TPS_v01.png",
 };
 
 app.get("/favicon.ico", (req, res) => {
