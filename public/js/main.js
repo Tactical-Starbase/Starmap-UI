@@ -831,7 +831,7 @@ class App {
 		const planeHeight = (maxs.y - mins.y);
 		const scaleX = planeWidth / imgWidth;
 		const scaleY = planeHeight / imgHeight;
-		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; 
+		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES;
 		// Create the planes
 		let imgIdx = 0;
 		const loader = new THREE.TextureLoader();
@@ -1248,7 +1248,7 @@ class App {
 			const type = TYPES[t];
 			const option = document.createElement("option");
 			option.value = type.name;
-			option.innerText = parseTypeName(type.name);
+			option.innerText = type.name;
 			dropDownTypes.appendChild(option);
 		}
 		if (mode == "update") {
