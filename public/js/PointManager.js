@@ -60,18 +60,11 @@ function unhide(elm) {
 	elm.style.visibility = "";
 }
 
-export function fromGamePosOld(position) {
-	return {
-		x: position.y + pointOffset.x,
-		y: position.z + pointOffset.y,
-		z: -position.x + pointOffset.z,
-	};
-}
 export function fromGamePos(position) {
 	return {
-		x: position.z + pointOffset.x,
-		y: position.y + pointOffset.y,
-		z: -position.x + pointOffset.z,
+		x: position.x,
+		y: position.z,
+		z: -position.y,
 	};
 }
 class Point {
@@ -706,7 +699,7 @@ export default class PointManager {
 			},
 			name: "Test Zone!",
 			desc: "I am a test",
-			type: "TPS",
+			type: "IPS",
 			color: "#ff00ff",
 		});
 		this.zones.push(zone);

@@ -77,11 +77,11 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
-		id: "tpsRangeDisp",
+		id: "ipsRangeDisp",
 		default: false,
 		prop: "checked",
 		set: function (val) {
-			this.sceneObjs.TpsSphere.visible = val;
+			this.sceneObjs.IpsSphere.visible = val;
 		},
 	},
 	{
@@ -153,7 +153,7 @@ const SETTINGS_DEF = [{
 		}
 	},
 	{
-		id: "showTpsAxis",
+		id: "showIpsAxis",
 		default: false,
 		prop: "checked",
 		set: function (val) {

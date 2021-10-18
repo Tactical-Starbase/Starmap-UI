@@ -19,10 +19,10 @@ const infoTemplate = `
 		</div>
 
 		<div class="info-coord-grid">
-			<div class="tpsDisplayDiv">
-				<p class="infoText no-drag tpsDisplayVal">X: %POS_X%</p>
-				<p class="infoText no-drag tpsDisplayVal">Y: %POS_Y%</p>
-				<p class="infoText no-drag tpsDisplayVal">Z: %POS_Z%</p>
+			<div class="ipsDisplayDiv">
+				<p class="infoText no-drag ipsDisplayVal">X: %POS_X%</p>
+				<p class="infoText no-drag ipsDisplayVal">Y: %POS_Y%</p>
+				<p class="infoText no-drag ipsDisplayVal">Z: %POS_Z%</p>
 			</div>
 		</div>
 
@@ -104,7 +104,7 @@ import {
 	MARKER_SIZE_MAX,
 	DIST_MIN,
 	DIST_MAX,
-	TPS_RANGE,
+	IPS_RANGE,
 	safePos,
 	pointOffset,
 	TYPES,
@@ -163,7 +163,7 @@ class App {
 			Belt: null,
 			Safe: null,
 			EosClouds: null,
-			TpsSphere: null,
+			IpsSphere: null,
 		};
 		this.cameraController;
 		this.storage = localStorage;
@@ -325,6 +325,7 @@ class App {
 		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
 		this.sceneObjs.Eos.castShadow = true;
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
+		this.sceneObjs.Eos.position.x = -1 * (EOS_SIZE + DIST_TO_BELT);
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -399,22 +400,23 @@ class App {
 			EOS_SIZE / (MESH_SIZE - 0.1),
 			EOS_SIZE / (MESH_SIZE - 0.1)
 		);
+		this.sceneObjs.EosClouds.position.x = -1 * (EOS_SIZE + DIST_TO_BELT);
 		this.sceneObjs.scene.add(this.sceneObjs.EosClouds);
 
-		const tpsGeom = new THREE.SphereGeometry(TPS_RANGE, 32, 32);
-		const tpsMat = new THREE.MeshStandardMaterial({
+		const ipsGeom = new THREE.SphereGeometry(IPS_RANGE, 32, 32);
+		const ipsMat = new THREE.MeshStandardMaterial({
 			color: 0x00ff00,
 			transparent: true,
 			opacity: 0.3,
 			// side: THREE.DoubleSide,
 		});
-		this.sceneObjs.TpsSphere = new THREE.Mesh(tpsGeom, tpsMat);
-		this.sceneObjs.TpsSphere.position.set(
-			pointOffset.x,
-			pointOffset.y,
-			pointOffset.z
-		);
-		this.sceneObjs.scene.add(this.sceneObjs.TpsSphere);
+		this.sceneObjs.IpsSphere = new THREE.Mesh(ipsGeom, ipsMat);
+		// this.sceneObjs.IpsSphere.position.set(
+		// 	pointOffset.x,
+		// 	pointOffset.y,
+		// 	pointOffset.z
+		// );
+		this.sceneObjs.scene.add(this.sceneObjs.IpsSphere);
 
 		//Create the cam controller
 		this.cameraController = new CamController(
@@ -455,7 +457,7 @@ class App {
 		Belt.rotation.set(Math.PI / 2, 0, 0);
 		this.sceneObjs.Belt = Belt;
 
-		this.sceneObjs.Belt.position.set(0, height, 0)
+		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT) + 50000, height, 0)
 
 		//Belt.matrixAutoUpdate = false
 
