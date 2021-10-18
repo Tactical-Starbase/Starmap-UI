@@ -433,8 +433,8 @@ class App {
 		const holder = new THREE.Object3D();
 		holder.position.set(originCords.x, originCords.y, originCords.z);
 		const arrowHelperX = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 500000, "#ff0000", 50000, 10000);
-		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
-		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
+		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 0, -1), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
+		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
 		holder.add(arrowHelperX);
 		holder.add(arrowHelperY);
 		holder.add(arrowHelperZ);
@@ -457,7 +457,7 @@ class App {
 		Belt.rotation.set(Math.PI / 2, 0, 0);
 		this.sceneObjs.Belt = Belt;
 
-		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT) + 50000, height, 0)
+		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT) + 56000, height, 0)
 
 		//Belt.matrixAutoUpdate = false
 
@@ -1175,7 +1175,7 @@ class App {
 
 		app.setLoadingMessage("Setting up points...")
 		this.pointManager.updateLayers();
-		this.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000);
+		this.cameraController.posLerpTo(50000, 100000, 100000);
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {

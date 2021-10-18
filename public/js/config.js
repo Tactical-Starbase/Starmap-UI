@@ -62,7 +62,7 @@ export const HIGH_FPS_VAL = 60;
 export const LOW_FPS_VAL = 15;
 export const HEATMAN_TOTAL_IMAGES = 100;
 export const safePos = {
-	x: EOS_SIZE + DIST_TO_BELT,
+	x: 0,
 	y: 0,
 	z: 0,
 };
