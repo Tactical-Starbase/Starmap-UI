@@ -587,6 +587,11 @@ class Zone {
 				geometry = new THREE.SphereGeometry(this.shape.dims.width, 32, 32);
 				break;
 
+			case "oval":
+				geometry = new THREE.SphereGeometry(1, 32, 32);
+				geometry.scale(this.shape.dims.width, this.shape.dims.height, this.shape.dims.length);
+				break;
+
 			default:
 				console.log(`Unknown shape type ${this.shape.type}`);
 				return;
@@ -692,9 +697,11 @@ export default class PointManager {
 				z: 0,
 			},
 			shape: {
-				type: "sphere",
+				type: "oval",
 				dims: {
-					width: 1000000,
+					width: 60000,// 495000,
+					height: 215000,
+					length: 495000,
 				},
 			},
 			name: "Test Zone!",
