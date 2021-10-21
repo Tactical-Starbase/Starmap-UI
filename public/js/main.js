@@ -477,6 +477,26 @@ class App {
 		return intersects;
 	}
 
+	checkHardwareAcceleration() {
+		var canvas = document.createElement('canvas');
+		var gl;
+		var debugInfo;
+		var vendor;
+		var renderer;
+
+		try {
+			gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+			debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+			vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+			renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+			console.log("Renderer: "+ renderer)
+			return !renderer.includes("SwiftShader");
+		} catch (e) {
+			return false;
+		}
+		
+	}
+
 	getScreenPos(worldPos) {
 		const width = app.sceneObjs.renderer.domElement.width;
 		const height = app.sceneObjs.renderer.domElement.height;
@@ -668,6 +688,8 @@ class App {
 
 		const acceptBtn = document.getElementById("acceptCookies");
 		const popup = document.getElementById("popup");
+		const hwAccelerationWarning = document.getElementById("hw-acceleration-warning");
+		hwAccelerationWarning.style.display = app.checkHardwareAcceleration() ? "none" : "inline-block";
 		// const popupContent = document.getElementById("popup-content");
 		acceptBtn.onclick = function () {
 			self.storage.setItem("shown-new", "yes");
