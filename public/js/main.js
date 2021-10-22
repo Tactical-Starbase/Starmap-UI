@@ -19,10 +19,10 @@ const infoTemplate = `
 		</div>
 
 		<div class="info-coord-grid">
-			<div class="tpsDisplayDiv">
-				<p class="infoText no-drag tpsDisplayVal">X: %POS_X%</p>
-				<p class="infoText no-drag tpsDisplayVal">Y: %POS_Y%</p>
-				<p class="infoText no-drag tpsDisplayVal">Z: %POS_Z%</p>
+			<div class="ipsDisplayDiv">
+				<p class="infoText no-drag ipsDisplayVal">X: %POS_X%</p>
+				<p class="infoText no-drag ipsDisplayVal">Y: %POS_Y%</p>
+				<p class="infoText no-drag ipsDisplayVal">Z: %POS_Z%</p>
 			</div>
 		</div>
 
@@ -104,7 +104,7 @@ import {
 	MARKER_SIZE_MAX,
 	DIST_MIN,
 	DIST_MAX,
-	TPS_RANGE,
+	IPS_RANGE,
 	safePos,
 	pointOffset,
 	TYPES,
@@ -163,7 +163,7 @@ class App {
 			Belt: null,
 			Safe: null,
 			EosClouds: null,
-			TpsSphere: null,
+			IpsSphere: null,
 		};
 		this.cameraController;
 		this.storage = localStorage;
@@ -325,6 +325,7 @@ class App {
 		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
 		this.sceneObjs.Eos.castShadow = true;
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
+		this.sceneObjs.Eos.position.x = -1 * (EOS_SIZE + DIST_TO_BELT);
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -399,22 +400,23 @@ class App {
 			EOS_SIZE / (MESH_SIZE - 0.1),
 			EOS_SIZE / (MESH_SIZE - 0.1)
 		);
+		this.sceneObjs.EosClouds.position.x = -1 * (EOS_SIZE + DIST_TO_BELT);
 		this.sceneObjs.scene.add(this.sceneObjs.EosClouds);
 
-		const tpsGeom = new THREE.SphereGeometry(TPS_RANGE, 32, 32);
-		const tpsMat = new THREE.MeshStandardMaterial({
+		const ipsGeom = new THREE.SphereGeometry(IPS_RANGE, 32, 32);
+		const ipsMat = new THREE.MeshStandardMaterial({
 			color: 0x00ff00,
 			transparent: true,
 			opacity: 0.3,
 			// side: THREE.DoubleSide,
 		});
-		this.sceneObjs.TpsSphere = new THREE.Mesh(tpsGeom, tpsMat);
-		this.sceneObjs.TpsSphere.position.set(
-			pointOffset.x,
-			pointOffset.y,
-			pointOffset.z
-		);
-		this.sceneObjs.scene.add(this.sceneObjs.TpsSphere);
+		this.sceneObjs.IpsSphere = new THREE.Mesh(ipsGeom, ipsMat);
+		// this.sceneObjs.IpsSphere.position.set(
+		// 	pointOffset.x,
+		// 	pointOffset.y,
+		// 	pointOffset.z
+		// );
+		this.sceneObjs.scene.add(this.sceneObjs.IpsSphere);
 
 		//Create the cam controller
 		this.cameraController = new CamController(
@@ -431,8 +433,8 @@ class App {
 		const holder = new THREE.Object3D();
 		holder.position.set(originCords.x, originCords.y, originCords.z);
 		const arrowHelperX = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 500000, "#ff0000", 50000, 10000);
-		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
-		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
+		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 0, -1), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
+		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
 		holder.add(arrowHelperX);
 		holder.add(arrowHelperY);
 		holder.add(arrowHelperZ);
@@ -455,7 +457,7 @@ class App {
 		Belt.rotation.set(Math.PI / 2, 0, 0);
 		this.sceneObjs.Belt = Belt;
 
-		this.sceneObjs.Belt.position.set(0, height, 0)
+		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT) + 56000, height, 0)
 
 		//Belt.matrixAutoUpdate = false
 
@@ -473,6 +475,26 @@ class App {
 			true
 		);
 		return intersects;
+	}
+
+	checkHardwareAcceleration() {
+		var canvas = document.createElement('canvas');
+		var gl;
+		var debugInfo;
+		var vendor;
+		var renderer;
+
+		try {
+			gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+			debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+			vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+			renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+			console.log("Renderer: "+ renderer)
+			return !renderer.includes("SwiftShader");
+		} catch (e) {
+			return false;
+		}
+		
 	}
 
 	getScreenPos(worldPos) {
@@ -666,6 +688,8 @@ class App {
 
 		const acceptBtn = document.getElementById("acceptCookies");
 		const popup = document.getElementById("popup");
+		const hwAccelerationWarning = document.getElementById("hw-acceleration-warning");
+		hwAccelerationWarning.style.display = app.checkHardwareAcceleration() ? "none" : "inline-block";
 		// const popupContent = document.getElementById("popup-content");
 		acceptBtn.onclick = function () {
 			self.storage.setItem("shown-new", "yes");
@@ -1173,7 +1197,7 @@ class App {
 
 		app.setLoadingMessage("Setting up points...")
 		this.pointManager.updateLayers();
-		this.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000);
+		this.cameraController.posLerpTo(50000, 100000, 100000);
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {

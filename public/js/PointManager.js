@@ -60,18 +60,11 @@ function unhide(elm) {
 	elm.style.visibility = "";
 }
 
-export function fromGamePosOld(position) {
-	return {
-		x: position.y + pointOffset.x,
-		y: position.z + pointOffset.y,
-		z: -position.x + pointOffset.z,
-	};
-}
 export function fromGamePos(position) {
 	return {
-		x: position.z + pointOffset.x,
-		y: position.y + pointOffset.y,
-		z: -position.x + pointOffset.z,
+		x: position.x,
+		y: position.z,
+		z: -position.y,
 	};
 }
 class Point {
@@ -594,6 +587,11 @@ class Zone {
 				geometry = new THREE.SphereGeometry(this.shape.dims.width, 32, 32);
 				break;
 
+			case "oval":
+				geometry = new THREE.SphereGeometry(1, 32, 32);
+				geometry.scale(this.shape.dims.width, this.shape.dims.height, this.shape.dims.length);
+				break;
+
 			default:
 				console.log(`Unknown shape type ${this.shape.type}`);
 				return;
@@ -699,14 +697,16 @@ export default class PointManager {
 				z: 0,
 			},
 			shape: {
-				type: "sphere",
+				type: "oval",
 				dims: {
-					width: 1000000,
+					width: 60000,// 495000,
+					height: 215000,
+					length: 495000,
 				},
 			},
 			name: "Test Zone!",
 			desc: "I am a test",
-			type: "TPS",
+			type: "IPS",
 			color: "#ff00ff",
 		});
 		this.zones.push(zone);

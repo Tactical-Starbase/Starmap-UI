@@ -29,8 +29,7 @@ export const URLS = {
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
-export const SOLONS_OFFSET = 50000;
-export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
+export const DIST_TO_BELT = 3000000;
 export const BELT_HEIGHT = 600000;
 export const BELT_EDGE_RADIUS = 60000;
 
@@ -57,13 +56,13 @@ export const ZOOM_INTO_DIST = 10000;
 export const ZONE_WIRE_CUTOFF = 80000;
 export const ZONE_OUTLINE_POINTS = 100;
 export const ZONE_INTERACTION_SIZE = 1000;
-export const TPS_RANGE = 1000000;
+export const IPS_RANGE = 1000000;
 export const FPS_DROP_TIME = 1000 * 15; // 15 seconds of no mouse move
 export const HIGH_FPS_VAL = 60;
 export const LOW_FPS_VAL = 15;
 export const HEATMAN_TOTAL_IMAGES = 100;
 export const safePos = {
-	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
+	x: 0,
 	y: 0,
 	z: 0,
 };
@@ -71,7 +70,7 @@ export const MAX_MOTION_TRAILS = 10;
 //Offset from 0,0,0 that points are set too
 export const pointOffset = {
 	//Basically TPS origin compared to Eos
-	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
+	x: EOS_SIZE + DIST_TO_BELT,
 	y: 0,
 	z: 0,
 };
