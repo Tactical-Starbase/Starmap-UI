@@ -420,6 +420,45 @@
 	pointer-events: none;
 }
 
+.converter-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-rows: repeat(2, 1fr); */
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	text-align: center;
+	/* height: 20em; */
+}
+
+.cnvt-ips-coordinates {
+	grid-area: 1 / 1 / 1 / 1;
+}
+
+.cnvt-isan-coordinates {
+	grid-area: 1 / 2 / 1 / 2;
+}
+
+.cnvt-button {
+
+}
+
+.cnvt-title {
+	font-weight: bold;
+	font-size: 20px;
+	/* text-align: center; */
+	margin: 5px;
+	user-select: none;
+	position: absolute;
+	top: -1.3em;
+	left: 3%;
+	background-color: var(--user-style-02);
+	color: var(--user-style-03);
+	border: var(--user-style) 2px solid;
+	width: fit-content;
+	border-radius: 10px;
+	padding: 5px 10px 5px 10px;
+}
+
 /* Add Point */
 .point-create-grid {
 	display: grid;

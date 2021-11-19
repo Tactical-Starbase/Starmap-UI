@@ -136,6 +136,7 @@ import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
 import Calculator from "./calculator.js";
+import Converter from "./converter.js";
 
 import Stats from "./packages/Stats.js";
 
@@ -175,6 +176,7 @@ class App {
 		this.pointManager = new PointManager(this);
 		this.settings = new SettingsManager(this);
 		this.calculator = new Calculator(this);
+		this.converter = new Converter(this);
 		this.isLoggedIn = false;
 		this.updatePointId;
 		this.textFont;
@@ -559,6 +561,7 @@ class App {
 		// Calculator popup
 		this.calculator.init();
 
+		this.converter.init();
 		// New point popup
 		$(".add-point").draggable({
 			containment: "document",
@@ -1037,7 +1040,7 @@ class App {
 		if (sidenav.scrollHeight > sidenav.clientHeight) {
 			sidenav.style.width = "175px";
 		} else {
-			sidenav.style.width = "160px";
+			sidenav.style.width = "220px";
 		}
 		if (Date.now() - this.lastMouseMoved < FPS_DROP_TIME) {
 			this.setFpsTarget(HIGH_FPS_VAL);

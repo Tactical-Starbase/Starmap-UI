@@ -23,8 +23,8 @@
 .win-prop {
 	cursor: var(--main-cursor-grab);
 	min-width: 25em;
-	min-height: 20em;
-	max-width: 25em;
+	min-height: 10em;
+	max-width: 30em;
 	max-height: 20em;
 	display: none;
 	opacity: 0.5;
@@ -275,3 +275,30 @@ input[type="number"] {
 .calculator .calc-close {}
 
 .calculator .calc-close:hover {}
+
+/*
+|*************************************************************************;
+* Win -Converter
+|*************************************************************************;
+*/
+
+
+/* Converter panel */
+.converter {}
+
+.converter:hover {}
+
+.converter .cnvt-close {}
+
+.converter .cnvt-close:hover {}
+
+.ips-coordinates {
+	/* border: none;
+	display: contents; */
+
+}
+
+.isan-coordinates {
+	/* border: none;
+	display: contents; */
+}

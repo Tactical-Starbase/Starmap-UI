@@ -133,6 +133,10 @@
 					<span class="material-icons">calculate</span>
 					<!-- <img src="assets/buttons/sort-none.png"> -->
 				</button>
+				<button id="cnvtBtn" title="IPS/ISAN Converter">
+					<span class="material-icons">calculate</span>
+					<!-- <img src="assets/buttons/sort-none.png"> -->
+				</button>
 			</div>
 			<!-- <div class="button-row">
 				<button id="calcBtn"><img src="assets/buttons/calculator.png"></button><button id="empty"></button><button
@@ -446,6 +450,62 @@
 				</div>
 			</div>
 
+		</div>
+		<div id="converter" class="win-prop converter">
+			<span class="win-prop-close material-icons">
+				close
+			</span>
+			<p class="cnvt-title">IPS/ISAN Converter</p>
+
+			<div class="converter-grid">
+				<div class="cnvt-ips-coordinates">
+					<fieldset class="ips-coordinates">
+					IPS
+						<div class="row-pos-x">
+							<div class="no-drag">
+								<lable>X: </lable><input required type="number" name="ips-x" placeholder="X pos" id="formIpsXPos" />
+							</div>
+						</div>
+						<div class="row-pos-y">
+							<div class="no-drag">
+								<lable>Y: </lable><input required type="number" name="ips-y" placeholder="Y pos" id="formIpsYPos" />
+							</div>
+						</div>
+						<div class="row-pos-z">
+							<div class="no-drag">
+								<lable>Z: </lable><input required type="number" name="ips-z" placeholder="Z pos" id="formIpsZPos" />
+							</div>
+						</div>
+						<div class="no-drag">
+							<button id="cnvtToISAN" class="cnvt-button">Convert to ISAN</button>
+						</div>
+					</fieldset>
+				</div>
+				<br/>
+				<div class="cnvt-isan-coordinates">
+					<fieldset class="isan-coordinates">
+					ISAN
+						<div class="row-pos-x">
+							<div class="no-drag">
+								<lable>X: </lable><input required type="number" name="isan-x" placeholder="X pos" id="formIsanXPos" />
+							</div>
+						</div>
+						<div class="row-pos-y">
+							<div class="no-drag">
+								<lable>Y: </lable><input required type="number" name="isan-y" placeholder="Y pos" id="formIsanYPos" />
+							</div>
+						</div>
+						<div class="row-pos-z">
+							<div class="no-drag">
+								<lable>Z: </lable><input required type="number" name="isan-z" placeholder="Z pos" id="formIsanZPos" />
+							</div>
+						</div>
+						<div class="no-drag">
+							<button id="cnvtToIPS" class="cnvt-button">Convert to IPS</button>
+						</div>
+					</fieldset>
+				</div>
+			</div>
 		</div>
 		<div class="win-prop add-point ">
 			<span class="win-prop-close material-icons">
