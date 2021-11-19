@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- For code, check out https://github.com/Tactical-Starbase/Starmap-UI
+	Code forked from https://github.com/Collective-SB/Starmap under the GPL-->
 <head>
 	<meta charset="utf-8" />
 	<title>TACMap</title>
@@ -41,7 +42,6 @@
 
 
 	<script>
-		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
 		function hoverHandler() {
 			const elm = document.getElementsByClassName('more-info-tooltip')[0];
 			elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
@@ -73,12 +73,6 @@
 						stroke="#707070" stroke-width="1" />
 				</g>
 			</svg>
-
-
-			<!--<p class="loading-text">
-				<a href="https://https://github.com/chrishultin/Starmap-UI" style="color: white">Starmap</a>,
-				By Spedione, based off of code from The Collective
-			</p>-->
 			<div class="loading-container-sub">
 				<p id="loading-text" class="loading-text"> Loading TACMap... Powered by IPS </p>
 			</div>
@@ -567,9 +561,9 @@
 		</div>
 		<div class="popup" id="popup">
 			<div class="popup-content">
-				<h2>Welcome to Starmap!</h2>
+				<h2>Welcome to TACMap!</h2>
 				<p>
-					Starmap is a free IPS-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
+					TACMap is a free IPS-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
 
 					<div id="hw-acceleration-warning">
 					<h3>Warning: It appears that hardware acceleration is not enabled on your system. <br>
@@ -578,6 +572,7 @@
 					<br><br>
 					To give feedback or report bugs please create a support ticket <a
 						href="https://discord.gg/umqq6DamZS">here</a>
+
 					<br>
 					This website uses cookies for functional and analytical purposes. This website runs on Nginx, and as such some metrics such as IP may be logged. Additionally if you login, Discord will share your username and Discord ID. No information will be shared, however if any users are banned then that fact (nothing else) will be shared. Press
 					"Accept" to continue.
