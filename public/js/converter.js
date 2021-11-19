@@ -1,14 +1,13 @@
 /*global $ */
 /*global THREE */ //Add commas into a string
 function isanToIps(x, y, z) {
-	return [parseInt(z) + 15046, parseInt(x) - 3474, parseInt(y) - 1416]
+	return [parseInt(z) + 15313, parseInt(x) - 3476, parseInt(y) - 1535]
 };
 function ipsToIsan(x, y, z) {
-	return [parseInt(y) + 3474, parseInt(z) + 1416, parseInt(x) - 15046]
+	return [parseInt(y) + 3476, parseInt(z) + 1535, parseInt(x) - 15313]
 };
 
-const IDs = ["selPoint0", "selPoint1"];
-export default class Calculator {
+export default class Converter {
 	constructor(app) {
 		this.app = app;
 		this.shown = false;
