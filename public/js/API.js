@@ -202,8 +202,10 @@ export default class API {
 			this.app.setLoggedIn(false);
 		}
 		if (data && data.id) {
-			this.app.pointManager.initFocusOn = data.id;
-			this.app.pointManager.hasInitFocus = false;
+			this.app.pointManager.initFocusOn = data.urlID;
+			this.app.pointManager.hasInitFocus = true;
+
+			await this.getPoint(data.id)
 		}
 		return res.status;
 	}
@@ -264,12 +266,13 @@ export default class API {
 			return true;
 		}
 	}
-	async getJWTFromCode(code) {
+	async getJWTFromCode(code, state) {
 		const res = await fetch(API_URL + "auth/jwt", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
 				"jwt-lookup-code": code,
+				"oauth-state": state,
 			},
 		});
 		try {

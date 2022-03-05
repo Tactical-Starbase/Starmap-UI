@@ -118,7 +118,7 @@ import {
 	FPS_DROP_TIME,
 	LOW_FPS_VAL,
 	HIGH_FPS_VAL,
-	HEATMAN_TOTAL_IMAGES
+	HEATMAN_TOTAL_IMAGES, EOS_ASTEROID_BELT, BELT_TRANSPARENCY
 } from "./config.js";
 
 import {
@@ -224,10 +224,11 @@ class App {
 
 		this.setLoadingMessage("Loading assets...")
 		//See if we just completed OAuth2
-		if (window.location.search.includes("code")) {
+		const urlParams = new URLSearchParams(window.location.search);
+		console.log(urlParams.get('code'))
+		if (urlParams.get('code') != null) {
 			try {
-				const code = window.location.search.substring("?code=".length);
-				const jwt = await this.api.getJWTFromCode(code);
+				const jwt = await this.api.getJWTFromCode(urlParams.get('code'), urlParams.get('state'));
 				if (jwt) {
 					this.storage.setItem("jwt", jwt);
 				}
@@ -459,11 +460,29 @@ class App {
 		Belt.rotation.set(Math.PI / 2, 0, 0);
 		this.sceneObjs.Belt = Belt;
 
-		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT) + 56000, height, 0)
+		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT), 0, 0)
 
 		//Belt.matrixAutoUpdate = false
 
 		this.sceneObjs.scene.add(Belt);
+	}
+
+	async makeBeltTorus(torus, material) {
+		console.log(torus)
+		var beltGeometry = new THREE.TorusGeometry(torus.center_radius, torus.thickness, BELT_QUALITY, BELT_QUALITY);
+
+		const Belt = new THREE.Mesh(beltGeometry, material);
+		console.log(Belt.scale)
+		Belt.scale.set(torus.scaleX, torus.scaleY);
+		Belt.material.side = THREE.DoubleSide;
+
+		Belt.rotation.set(Math.PI / 2, 0, 0);
+		this.sceneObjs.Belt = Belt;
+		this.sceneObjs.Belt.position.set(torus.center_pos.x, torus.center_pos.y, torus.center_pos.z);
+		this.sceneObjs.Belt.scale
+
+		this.sceneObjs.scene.add(Belt)
+
 	}
 
 	//Casts a ray and returns what points are hit
@@ -746,60 +765,83 @@ class App {
 		};
 	}
 
+	// async makeBelt() {
+	// 	//Belt
+	// 	const startPos = 0 - (BELT_HEIGHT / 2)
+	// 	const endPos = 0 + (BELT_HEIGHT / 2)
+	//
+	// 	const BELT_RING_COUNT = this.beltSamples
+	// 	const BELT_TRANSPARENCY = this.beltTransparency
+	//
+	// 	let i = 0;
+	//
+	// 	const startTime = Date.now()
+	//
+	// 	const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+	//
+	// 	let beltMat = new THREE.MeshBasicMaterial({
+	// 		color: 0xffffff,
+	// 		opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
+	// 		transparent: true,
+	// 	});
+	//
+	// 	beltMat.depthWrite = false;
+	// 	beltMat.needsUpdate = true;
+	//
+	// 	if (BELT_RING_COUNT == 2) {
+	// 		// this.makeBeltLayer(0, -35000, 0, beltMat)
+	// 		this.makeBeltLayer(0,0,0,beltMat)
+	// 	} else {
+	// 		while (i < BELT_RING_COUNT - 1) {
+	// 			i++
+	//
+	// 			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+	// 			console.log(height)
+	//
+	// 			let distToCentre;
+	//
+	// 			if (height > 0) {
+	// 				distToCentre = i - (BELT_RING_COUNT / 2)
+	// 			} else if (height === 0) {
+	// 				distToCentre = 0
+	// 			} else {
+	// 				distToCentre = (BELT_RING_COUNT / 2) - i
+	// 			}
+	//
+	// 			let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
+	//
+	// 			//Thanks to g.w.a.c.a for the help with creating this
+	// 			let x = Math.sqrt(distToEdge / BELT_RING_COUNT)
+	// 			let offset = -x * BELT_EDGE_RADIUS
+	//
+	// 			// this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
+	// 			this.makeBeltTorus({x: -8450000, y: 0, z: 0}, EOS_SIZE + DIST_TO_BELT,
+	// 				EOS_SIZE + DIST_TO_BELT + BELT_THICK, height, beltMat);
+	// 		}
+	// 	}
+	//
+	// 	const endTime = Date.now()
+	//
+	// 	console.log(endTime - startTime + "ms to load the belt.")
+	// }
+
 	async makeBelt() {
-		//Belt
-		const startPos = 0 - (BELT_HEIGHT / 2)
-		const endPos = 0 + (BELT_HEIGHT / 2)
-
-		const BELT_RING_COUNT = this.beltSamples
-		const BELT_TRANSPARENCY = this.beltTransparency
-
 		let i = 0;
 
-		const startTime = Date.now()
-
-		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
-
-		let beltMat = new THREE.MeshBasicMaterial({
+		const material = new THREE.MeshLambertMaterial({
 			color: 0xffffff,
-			opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
+			opacity: BELT_TRANSPARENCY,
 			transparent: true,
+			blending: THREE.AdditiveBlending,
+			side: THREE.DoubleSide,
 		});
 
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-
-		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, -35000, 0, beltMat)
-		} else {
-			while (i < BELT_RING_COUNT - 1) {
-				i++
-
-				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-
-				let distToCentre;
-
-				if (height > 0) {
-					distToCentre = i - (BELT_RING_COUNT / 2)
-				} else if (height === 0) {
-					distToCentre = 0
-				} else {
-					distToCentre = (BELT_RING_COUNT / 2) - i
-				}
-
-				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
-
-				//Thanks to g.w.a.c.a for the help with creating this
-				let x = Math.sqrt(distToEdge / BELT_RING_COUNT)
-				let offset = -x * BELT_EDGE_RADIUS
-
-				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
-			}
+		console.log("making belt")
+		console.log(EOS_ASTEROID_BELT.length)
+		while (i < EOS_ASTEROID_BELT.length) {
+			await this.makeBeltTorus(EOS_ASTEROID_BELT[i], material)
+			i++
 		}
-
-		const endTime = Date.now()
-
-		console.log(endTime - startTime + "ms to load the belt.")
 	}
 
 	updateSubtypes(newType, defaultTo) {
