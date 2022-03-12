@@ -225,7 +225,6 @@ class App {
 		this.setLoadingMessage("Loading assets...")
 		//See if we just completed OAuth2
 		const urlParams = new URLSearchParams(window.location.search);
-		console.log(urlParams.get('code'))
 		if (urlParams.get('code') != null) {
 			try {
 				const jwt = await this.api.getJWTFromCode(urlParams.get('code'), urlParams.get('state'));
@@ -347,7 +346,7 @@ class App {
 		Safe.rotation.set(Math.PI / 2, 0, Math.PI / 2);
 		this.sceneObjs.Safe = Safe;
 		Safe.visible = false;
-		this.sceneObjs.scene.add(Safe);
+		// this.sceneObjs.scene.add(Safe);
 
 		//Creating some basic lighting
 		//This lighting dose not get saved, which may be a problem
@@ -468,11 +467,9 @@ class App {
 	}
 
 	async makeBeltTorus(torus, material) {
-		console.log(torus)
 		var beltGeometry = new THREE.TorusGeometry(torus.center_radius, torus.thickness, BELT_QUALITY, BELT_QUALITY);
 
 		const Belt = new THREE.Mesh(beltGeometry, material);
-		console.log(Belt.scale)
 		Belt.scale.set(torus.scaleX, torus.scaleY);
 		Belt.material.side = THREE.DoubleSide;
 
@@ -511,7 +508,7 @@ class App {
 			vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
 			renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 			console.log("Renderer: "+ renderer)
-			return !renderer.includes("SwiftShader");
+			return (!renderer.includes("SwiftShader") && !renderer.includes("ANGLE"));
 		} catch (e) {
 			return false;
 		}
