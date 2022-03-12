@@ -37,7 +37,7 @@ export const EOS_QUALITY = 32;
 export const BELT_QUALITY = 96;
 
 export const BELT_THICK = 1099980;
-export const BELT_TRANSPARENCY = 0.5;
+export const BELT_TRANSPARENCY = 0.2;
 
 export const EOS_ASTEROID_BELT = [
 	{

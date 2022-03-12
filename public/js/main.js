@@ -831,6 +831,7 @@ class App {
 			transparent: true,
 			blending: THREE.AdditiveBlending,
 			side: THREE.DoubleSide,
+			depthWrite: false
 		});
 
 		console.log("making belt")
