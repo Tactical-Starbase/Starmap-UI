@@ -7,7 +7,7 @@ export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
-export const SSO_URL = "http://localhost:8000/login?service=";
+export const SSO_URL = "https://sso.tac-map.com/login?service=";
 export const URLS = {
 	api: {
 		local: "http://localhost:8000/",
