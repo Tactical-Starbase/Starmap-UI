@@ -480,7 +480,7 @@ class App {
 			vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
 			renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 			console.log("Renderer: "+ renderer)
-			return (!renderer.includes("SwiftShader") && !renderer.includes("ANGLE"));
+			return (!renderer.includes("SwiftShader") && !renderer.includes("OpenGL"));
 		} catch (e) {
 			return false;
 		}
