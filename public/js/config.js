@@ -8,6 +8,7 @@ export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
 export const SSO_URL = "https://sso.tac-map.com/login?service=";
+// export const SSO_URL = 'http://localhost:8000/login?service='
 export const URLS = {
 	api: {
 		local: "http://localhost:8000/",
@@ -25,7 +26,7 @@ export const URLS = {
 		local: SSO_URL + "http://localhost:80/",
 		prod: SSO_URL + "https://tac-map.com/",
 		lite: SSO_URL + "http://tac-map.com/",
-		remoteDev: SSO_URL + "http://localhost:5000/",
+		remoteDev: SSO_URL + "http://localhost:80/",
 	},
 };
 export const EOS_SIZE = 5500000;
@@ -38,17 +39,6 @@ export const BELT_QUALITY = 96;
 
 export const BELT_THICK = 1099980;
 export const BELT_TRANSPARENCY = 0.2;
-
-export const EOS_ASTEROID_BELT = [
-	{
-		center_pos: {x: -8450000, y: 0, z: 0},
-		center_radius: 2608683.79425,
-		thickness: 300000,
-		scaleX: 3.6666,
-		scaleY: 3.6666,
-
-	}
-]
 
 export const SAFE_LEN = 1000000;
 export const SAFE_RAD = 100000 / 2;

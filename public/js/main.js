@@ -118,8 +118,11 @@ import {
 	FPS_DROP_TIME,
 	LOW_FPS_VAL,
 	HIGH_FPS_VAL,
-	HEATMAN_TOTAL_IMAGES, EOS_ASTEROID_BELT, BELT_TRANSPARENCY
+	HEATMAN_TOTAL_IMAGES, EOS_ASTEROID_BELT, BELT_TRANSPARENCY,
+	ELYSIUM_MOON, ELYSIUM_BELT
 } from "./config.js";
+
+import { PLANETS, BELTS } from "./celestialObjects.js";
 
 import {
 	constrain,
@@ -165,6 +168,7 @@ class App {
 			Safe: null,
 			EosClouds: null,
 			IpsSphere: null,
+			Elysium_Moon: null
 		};
 		this.cameraController;
 		this.storage = localStorage;
@@ -314,20 +318,7 @@ class App {
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
 
-		//Eos
-		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
-		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
-		const eosMat = new THREE.MeshStandardMaterial({
-			// color: 0x2c3ca3,
-			metalness: 0.8,
-			map: tex,
-			roughness: 1,
-			// wireframe: false,
-		});
-		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
-		this.sceneObjs.Eos.castShadow = true;
-		this.sceneObjs.scene.add(this.sceneObjs.Eos);
-		this.sceneObjs.Eos.position.x = -1 * (EOS_SIZE + DIST_TO_BELT);
+		this.makePlanets();
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -446,26 +437,6 @@ class App {
 
 	}
 
-	async makeBeltLayer(height, innerOverride, outerOverride, material) {
-		var beltGem = new THREE.RingGeometry(
-			EOS_SIZE + DIST_TO_BELT + innerOverride,
-			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
-			BELT_QUALITY,
-			1,
-		);
-
-		const Belt = new THREE.Mesh(beltGem, material);
-		Belt.material.side = THREE.DoubleSide;
-		Belt.rotation.set(Math.PI / 2, 0, 0);
-		this.sceneObjs.Belt = Belt;
-
-		this.sceneObjs.Belt.position.set(-1 * (EOS_SIZE + DIST_TO_BELT), 0, 0)
-
-		//Belt.matrixAutoUpdate = false
-
-		this.sceneObjs.scene.add(Belt);
-	}
-
 	async makeBeltTorus(torus, material) {
 		var beltGeometry = new THREE.TorusGeometry(torus.center_radius, torus.thickness, BELT_QUALITY, BELT_QUALITY);
 
@@ -473,9 +444,10 @@ class App {
 		Belt.scale.set(torus.scaleX, torus.scaleY);
 		Belt.material.side = THREE.DoubleSide;
 
-		Belt.rotation.set(Math.PI / 2, 0, 0);
+		Belt.rotation.set(torus.rotation.x, torus.rotation.y, torus.rotation.z);
 		this.sceneObjs.Belt = Belt;
-		this.sceneObjs.Belt.position.set(torus.center_pos.x, torus.center_pos.y, torus.center_pos.z);
+		var position = fromGamePos(torus.center_pos)
+		this.sceneObjs.Belt.position.set(position.x, position.y, position.z);
 		this.sceneObjs.Belt.scale
 
 		this.sceneObjs.scene.add(Belt)
@@ -508,7 +480,7 @@ class App {
 			vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
 			renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 			console.log("Renderer: "+ renderer)
-			return (!renderer.includes("SwiftShader") && !renderer.includes("ANGLE"));
+			return (!renderer.includes("SwiftShader") && !renderer.includes("OpenGL"));
 		} catch (e) {
 			return false;
 		}
@@ -571,7 +543,7 @@ class App {
 		// Settings popup
 		this.settings.init();
 
-		this.makeBelt()
+		this.makeBelts()
 
 
 		// Calculator popup
@@ -762,83 +734,44 @@ class App {
 		};
 	}
 
-	// async makeBelt() {
-	// 	//Belt
-	// 	const startPos = 0 - (BELT_HEIGHT / 2)
-	// 	const endPos = 0 + (BELT_HEIGHT / 2)
-	//
-	// 	const BELT_RING_COUNT = this.beltSamples
-	// 	const BELT_TRANSPARENCY = this.beltTransparency
-	//
-	// 	let i = 0;
-	//
-	// 	const startTime = Date.now()
-	//
-	// 	const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
-	//
-	// 	let beltMat = new THREE.MeshBasicMaterial({
-	// 		color: 0xffffff,
-	// 		opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
-	// 		transparent: true,
-	// 	});
-	//
-	// 	beltMat.depthWrite = false;
-	// 	beltMat.needsUpdate = true;
-	//
-	// 	if (BELT_RING_COUNT == 2) {
-	// 		// this.makeBeltLayer(0, -35000, 0, beltMat)
-	// 		this.makeBeltLayer(0,0,0,beltMat)
-	// 	} else {
-	// 		while (i < BELT_RING_COUNT - 1) {
-	// 			i++
-	//
-	// 			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-	// 			console.log(height)
-	//
-	// 			let distToCentre;
-	//
-	// 			if (height > 0) {
-	// 				distToCentre = i - (BELT_RING_COUNT / 2)
-	// 			} else if (height === 0) {
-	// 				distToCentre = 0
-	// 			} else {
-	// 				distToCentre = (BELT_RING_COUNT / 2) - i
-	// 			}
-	//
-	// 			let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
-	//
-	// 			//Thanks to g.w.a.c.a for the help with creating this
-	// 			let x = Math.sqrt(distToEdge / BELT_RING_COUNT)
-	// 			let offset = -x * BELT_EDGE_RADIUS
-	//
-	// 			// this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
-	// 			this.makeBeltTorus({x: -8450000, y: 0, z: 0}, EOS_SIZE + DIST_TO_BELT,
-	// 				EOS_SIZE + DIST_TO_BELT + BELT_THICK, height, beltMat);
-	// 		}
-	// 	}
-	//
-	// 	const endTime = Date.now()
-	//
-	// 	console.log(endTime - startTime + "ms to load the belt.")
-	// }
-
-	async makeBelt() {
+	async makeBelts() {
 		let i = 0;
+		while (i < BELTS.length) {
+			let material = new THREE.MeshLambertMaterial({
+				color: 0xffffff,
+				opacity: BELT_TRANSPARENCY,
+				transparent: true,
+				side: THREE.DoubleSide,
+				depthWrite: false
+			});
+			await this.makeBeltTorus(BELTS[i], material);
+			i++;
+		}
+	}
 
-		const material = new THREE.MeshLambertMaterial({
-			color: 0xffffff,
-			opacity: BELT_TRANSPARENCY,
-			transparent: true,
-			blending: THREE.AdditiveBlending,
-			side: THREE.DoubleSide,
-			depthWrite: false
-		});
-
-		console.log("making belt")
-		console.log(EOS_ASTEROID_BELT.length)
-		while (i < EOS_ASTEROID_BELT.length) {
-			await this.makeBeltTorus(EOS_ASTEROID_BELT[i], material)
-			i++
+	async makePlanets() {
+		// Generate the planets.  Planet 0 is Eos
+		var i=0;
+		while (i<PLANETS.length) {
+			let tex = new THREE.TextureLoader().load(PLANETS[i].texture)
+			let geometry = new THREE.SphereGeometry(PLANETS[i].radius, PLANETS[i].quality, PLANETS[i].quality)
+			let material = new THREE.MeshStandardMaterial({
+				metalness: PLANETS[i].metalness,
+				map: tex,
+				roughness: PLANETS[i].roughness
+			})
+			let planet = new THREE.Mesh(geometry, material)
+			planet.castShadow = true
+			let world_pos = fromGamePos(PLANETS[i].center)
+			planet.position.set(world_pos.x, world_pos.y, world_pos.z)
+			if (i==0) {
+				this.sceneObjs.Eos = planet
+				this.sceneObjs.scene.add(this.sceneObjs.Eos)
+			}
+			else {
+				this.sceneObjs.scene.add(planet)
+			}
+			i++;
 		}
 	}
 
